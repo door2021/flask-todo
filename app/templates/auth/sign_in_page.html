@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Sign In - Todo App{% endblock %}
+
+{% block content %}
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+
+                <div class="card auth-card p-4 p-md-5">
+                    <div class="card-body">
+
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold text-dark mb-1">Welcome Back</h2>
+                            <p class="text-muted mb-0">Sign in to manage your todos</p>
+                        </div>
+
+                        <form method="POST" action="{{ url_for('auth.sign_in') }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="you@example.com"
+                                    value="{{ request.form.email if request.form else '' }}" required autofocus>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Enter your password" required>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                    <label class="form-check-label text-muted small" for="remember">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="{{ url_for('auth.forgot_password') }}" class="text-decoration-none small"
+                                    style="color: var(--primary-start);">
+                                    Forgot password?
+                                </a>
+                            </div>
+
+                            <button type="submit" class="btn btn-gradient btn-lg w-100 mb-3 text-white">
+                                Sign In
+                            </button>
+
+                            <div class="text-center">
+                                <span class="text-muted small">Don't have an account? </span>
+                                <a href="{{ url_for('auth.sign_up') }}" class="text-decoration-none fw-medium"
+                                    style="color: var(--primary-start);">
+                                    Create one
+                                </a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

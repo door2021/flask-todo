@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Todo App{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="row g-0">
+
+        {% include "partials/sidebar.html" %}
+
+        <div class="col-md-9 col-lg-10 main-content">
+
+            <div class="d-flex justify-content-between align-items-center p-3 p-md-4 border-bottom bg-white sticky-top">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-secondary sidebar-toggle me-2 d-md-none" data-bs-toggle="collapse"
+                        data-bs-target="#sidebarMenu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h2 class="h4 mb-0 fw-bold">My Todos</h2>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <div class="input-group input-group-sm" style="max-width: 200px;">
+                        <span class="input-group-text bg-light border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control form-control-sm bg-light border-start-0"
+                            placeholder="Search..." id="searchTodo">
+                    </div>
+
+                    <select class="form-select form-select-sm w-auto" onchange="sortTodos(this.value)">
+                        <option value="">Sort</option>
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="title">A-Z</option>
+                    </select>
+
+                    <button class="btn btn-gradient btn-sm text-white" data-bs-toggle="modal"
+                        data-bs-target="#addTodoModal">
+                        <i class="bi bi-plus-lg me-1"></i> Add
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-3 p-md-4">
+                {% include "todos/list_todo.html" %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include "todos/add_todo.html" %}
+{% include "todos/edit_todo.html" %}
+{% endblock %}

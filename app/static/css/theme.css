@@ -1,0 +1,243 @@
+:root {
+  /* Primary Gradient Theme */
+  --primary-start: #667eea;
+  --primary-end: #764ba2;
+  --primary-gradient: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
+  
+  /* Text & UI Colors */
+  --text-dark: #333;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --input-focus-shadow: rgba(102, 126, 234, 0.25);
+  
+  /* Spacing & Effects */
+  --card-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+  --card-radius: 12px;
+  --transition: all 0.2s ease;
+}
+
+/* Gradient Background Utility */
+.bg-gradient-primary {
+  background: var(--primary-gradient) !important;
+}
+
+/* Theme Button */
+.btn-gradient {
+  background: var(--primary-gradient);
+  border: none;
+  color: white;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  color: white;
+}
+
+.btn-gradient:focus {
+  box-shadow: 0 0 0 0.25rem var(--input-focus-shadow);
+}
+
+/* Auth Card Styling */
+.auth-card {
+  border: none;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  background: white;
+}
+
+/* Form Enhancements */
+.form-control:focus {
+  border-color: var(--primary-start);
+  box-shadow: 0 0 0 0.25rem var(--input-focus-shadow);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.btn-gradient {
+  background: var(--primary-gradient);
+  border: none;
+  color: white !important; /* Force white text */
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn-gradient:hover,
+.btn-gradient:focus,
+.btn-gradient:active {
+  color: white !important; /* Keep white on all states */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* ===== Sidebar Styles ===== */
+.sidebar {
+  background: var(--primary-gradient) !important;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar .list-group-item {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  transition: var(--transition);
+}
+
+.sidebar .list-group-item:hover,
+.sidebar .list-group-item.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateX(4px);
+}
+
+.sidebar .list-group-item i {
+  width: 20px;
+  margin-right: 8px;
+}
+
+/* ===== Todo Card Styles ===== */
+.todo-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  background: white;
+}
+
+.todo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.todo-card.completed {
+  opacity: 0.75;
+  background: #f8f9fa;
+}
+
+.todo-card.completed .todo-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ===== Action Buttons ===== */
+.btn-action {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.btn-favorite {
+  color: #6c757d;
+  background: #f8f9fa;
+  border: none;
+}
+
+.btn-favorite.active,
+.btn-favorite:hover {
+  color: #ffc107;
+  background: #fff3cd;
+}
+
+.btn-edit {
+  color: #0d6efd;
+  background: #e7f1ff;
+  border: none;
+}
+
+.btn-edit:hover {
+  background: #0d6efd;
+  color: white;
+}
+
+.btn-delete {
+  color: #dc3545;
+  background: #ffe7e9;
+  border: none;
+}
+
+.btn-delete:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* ===== Modal Theme ===== */
+.modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem 1.5rem;
+}
+
+.modal-title {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed var(--border-color);
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* ===== Responsive Sidebar Toggle ===== */
+.sidebar-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    z-index: 1050;
+    transition: left 0.3s ease;
+    width: 280px;
+  }
+  
+  .sidebar.show {
+    left: 0;
+  }
+  
+  .sidebar-toggle {
+    display: inline-flex;
+  }
+  
+  .main-content {
+    width: 100%;
+  }
+}

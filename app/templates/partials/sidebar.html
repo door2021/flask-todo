@@ -1,0 +1,44 @@
+<div class="col-md-3 col-lg-2 sidebar p-3 d-flex flex-column">
+
+    <div class="d-flex align-items-center mb-4 px-2">
+        <i class="bi bi-check2-square fs-4 me-2"></i>
+        <h5 class="mb-0 text-white fw-bold">TodoApp</h5>
+    </div>
+
+    <div class="list-group list-group-flush flex-grow-1" id="sidebarMenu">
+        <a href="{{ url_for('home.dashboard', filter='all') }}"
+            class="list-group-item list-group-item-action {% if active_filter == 'all' %}active{% endif %}">
+            <i class="bi bi-inboxes me-2"></i>All Todos
+        </a>
+
+        <a href="{{ url_for('home.dashboard', filter='favorite') }}"
+            class="list-group-item list-group-item-action {% if active_filter == 'favorite' %}active{% endif %}">
+            <i class="bi bi-star me-2"></i>Favorites
+        </a>
+
+        <a href="{{ url_for('home.dashboard', filter='completed') }}"
+            class="list-group-item list-group-item-action {% if active_filter == 'completed' %}active{% endif %}">
+            <i class="bi bi-check-circle me-2"></i>Completed
+        </a>
+
+        <a href="{{ url_for('home.dashboard', filter='deleted') }}"
+            class="list-group-item list-group-item-action {% if active_filter == 'deleted' %}active{% endif %}"
+            style="opacity: 0.9;">
+            <i class="bi bi-trash me-2"></i>Deleted
+        </a>
+    </div>
+
+    <div class="mt-auto pt-3 border-top border-light border-opacity-25">
+        <div class="d-flex align-items-center px-2">
+            <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 36px; height: 36px;">
+                <i class="bi bi-person text-white"></i>
+            </div>
+            <div class="ms-3">
+                <small class="text-white d-block fw-medium">{{ current_user.username }}</small>
+                <a href="{{ url_for('auth.sign_out') }}" class="text-white-50 small text-decoration-none">Sign out</a>
+            </div>
+        </div>
+    </div>
+
+</div>

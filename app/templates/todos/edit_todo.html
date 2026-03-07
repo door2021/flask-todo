@@ -1,0 +1,70 @@
+<div class="modal fade" id="editTodoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form method="POST" id="editTodoForm">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-pencil-square me-2"></i>Edit Todo
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" id="editTodoId" name="id">
+
+                    <div class="mb-3">
+                        <label for="editTitle" class="form-label">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="editTitle" name="title" required maxlength="100">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editDescription" name="description" rows="3"
+                            maxlength="500"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Priority</label>
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="edit_priority" id="editPrioLow" value="low">
+                            <label class="btn btn-outline-success btn-sm" for="editPrioLow">
+                                <i class="bi bi-arrow-down me-1"></i>Low
+                            </label>
+
+                            <input type="radio" class="btn-check" name="edit_priority" id="editPrioMed" value="medium">
+                            <label class="btn btn-outline-warning btn-sm" for="editPrioMed">
+                                <i class="bi bi-dash me-1"></i>Medium
+                            </label>
+
+                            <input type="radio" class="btn-check" name="edit_priority" id="editPrioHigh" value="high">
+                            <label class="btn btn-outline-danger btn-sm" for="editPrioHigh">
+                                <i class="bi bi-arrow-up me-1"></i>High
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-0">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="editCompleted" name="completed">
+                            <label class="form-check-label" for="editCompleted">Mark as completed</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger btn-sm me-auto" id="deleteTodoBtn">
+                        <i class="bi bi-trash me-1"></i> Delete
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-gradient text-white">
+                        <i class="bi bi-check-lg me-1"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
