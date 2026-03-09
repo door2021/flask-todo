@@ -17,11 +17,6 @@ A production-ready task management web application built with Flask, featuring u
 - **💾 Database**: MySQL on Amazon RDS with Flask-Migrate for schema management
 - **☁️ Cloud-Ready**: Deployed on AWS Elastic Beanstalk with auto-scaling
 
-## 📸 Screenshots
-
-![Login Page](docs/screenshots/login.png)
-![Dashboard](docs/screenshots/dashboard.png)
-
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -134,24 +129,6 @@ flask-todo-app/
     ├── env.py
     └── script.py.mako
 ```
-
-## 🔧 Configuration
-
-### Development
-```python
-class DevelopmentConfig(Config):
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://user:pass@localhost/your-db-name"
-```
-
-### Production (AWS)
-```python
-class ProductionConfig(Config):
-    DEBUG = False
-    # Credentials fetched from AWS Secrets Manager
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_SECRETS.get('username')}:{DB_SECRETS.get('password')}@{DB_SECRETS.get('host')}:{DB_SECRETS.get('port')}/{DB_SECRETS.get('dbname')}"
-```
-
 ## ☁️ AWS Deployment
 
 ### Prerequisites
@@ -160,89 +137,6 @@ class ProductionConfig(Config):
 - Elastic Beanstalk CLI installed (`pip install awsebcli`)
 - RDS instance created
 - Secrets Manager secret created
-
-### 1. Create AWS Secrets Manager Secret
-
-```bash
-aws secretsmanager create-secret \
-  --name prod/flask-todo/db \
-  --secret-string '{
-    "username":"username",
-    "password":"your-password",
-    "host":"your-rds-endpoint.rds.amazonaws.com",
-    "port":3306,
-    "dbname":"your-db-name"
-  }'
-```
-
-### 2. Create IAM Role for EB
-
-```bash
-aws iam create-role \
-  --role-name EB-Secrets-Role \
-  --assume-role-policy-document file://trust-policy.json
-
-aws iam attach-role-policy \
-  --role-name EB-Secrets-Role \
-  --policy-arn arn:aws:iam::aws:policy/SecretsManagerReadWrite
-```
-
-### 3. Initialize Elastic Beanstalk
-
-```bash
-eb init
-# Select region: ap-southeast-1
-# Select application: flask-todo-app
-```
-
-### 4. Create Environment
-
-```bash
-eb create flask-todo-env \
-  --region ap-southeast-1 \
-  --instance-type t2.micro \
-  --database.engine mysql \
-  --database.username admin \
-  --database.password your-password
-```
-
-### 5. Deploy
-
-```bash
-# Run migrations locally against RDS
-flask db upgrade
-
-# Deploy application
-eb deploy
-```
-
-### 6. Open Application
-
-```bash
-eb open
-```
-
-## 📦 Database Migrations
-
-### Create Migration
-```bash
-flask db migrate -m "Description of changes"
-```
-
-### Apply Migrations
-```bash
-flask db upgrade
-```
-
-### Check Current Version
-```bash
-flask db current
-```
-
-### Downgrade (if needed)
-```bash
-flask db downgrade -1
-```
 
 ## 🔐 Security
 
@@ -293,30 +187,16 @@ pytest --cov=app
 | **Server** | Waitress / Gunicorn |
 | **Frontend** | Bootstrap 5 |
 
-## 🔧 Scripts
-
-### Windows (PowerShell)
-```powershell
-# Create deployment package
-Compress-Archive -Path application.py,requirements.txt,config.py,app,migrations,static,templates,.gitignore -DestinationPath deploy.zip -Force
-```
-
-### Mac/Linux
-```bash
-# Create deployment package
-zip -r deploy.zip application.py requirements.txt config.py app migrations static templates .gitignore -x "*.env" -x "venv/*" -x "__pycache__/*"
-```
-
 ## 📝 API Endpoints
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
 | GET | `/` | Home page | No |
-| GET | `/auth/register` | Registration page | No |
-| POST | `/auth/register` | Create account | No |
-| GET | `/auth/login` | Login page | No |
-| POST | `/auth/login` | Authenticate user | No |
-| GET | `/auth/logout` | Logout user | Yes |
+| GET | `/register` | Registration page | No |
+| POST | `/register` | Create account | No |
+| GET | `/login` | Login page | No |
+| POST | `/login` | Authenticate user | No |
+| GET | `/logout` | Logout user | Yes |
 | GET | `/dashboard` | User dashboard | Yes |
 | POST | `/todo/add` | Create todo | Yes |
 | POST | `/todo/delete/<id>` | Delete todo | Yes |
@@ -334,21 +214,11 @@ zip -r deploy.zip application.py requirements.txt config.py app migrations stati
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Authors
-
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
-
 ## 🙏 Acknowledgments
 
 - Flask documentation
 - AWS Elastic Beanstalk team
 - Bootstrap community
 - All contributors
-
-## 📞 Support
-
-For support, email your-email@example.com or open an issue in the repository.
-
----
 
 **Made with ❤️ using Flask and AWS**
