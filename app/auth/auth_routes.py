@@ -8,7 +8,6 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/sign-in', methods=['GET', 'POST'])
 def sign_in():
-    """Sign In - Separate Page"""
     if current_user.is_authenticated:
         return redirect(url_for('home.dashboard'))
     
@@ -31,7 +30,6 @@ def sign_in():
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
-    """Sign Up - Separate Page"""
     if current_user.is_authenticated:
         return redirect(url_for('home.dashboard'))
     
@@ -61,7 +59,6 @@ def sign_up():
 
 @auth.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
-    """Forgot Password - Separate Page"""
     if current_user.is_authenticated:
         return redirect(url_for('home.dashboard'))
     
@@ -81,7 +78,6 @@ def forgot_password():
 
 @auth.route('/reset-password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    """Reset Password - Separate Page"""
     if current_user.is_authenticated:
         return redirect(url_for('home.dashboard'))
     
@@ -115,7 +111,6 @@ def reset_password(token):
 @auth.route('/sign-out')
 @login_required
 def sign_out():
-    """Sign Out"""
     logout_user()
     flash('You have been signed out', 'info')
     return redirect(url_for('auth.sign_in'))

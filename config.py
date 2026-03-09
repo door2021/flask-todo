@@ -1,8 +1,9 @@
-import os
 from datetime import timedelta
+import os
+
 
 class Config:
-    SECRET_KEY = "TodosAppSecretKeyDev"
+    SECRET_KEY = os.environ.get('SECRET_KEY') or "TodosAppSecretKeyDev"
     PERMANENT_SESSION_LIFETIME = timedelta(days=7)
 
     # Email Configuration
@@ -20,14 +21,19 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or "mysql+pymysql://root:@localhost/todos"
+
+    SQLALCHEMY_DATABASE_URI = (
+        f"mysql+pymysql://{os.environ.get('RDS_USERNAME')}:"
+        f"{os.environ.get('RDS_PASSWORD')}@"
+        f"{os.environ.get('RDS_HOSTNAME')}:"
+        f"{os.environ.get('RDS_PORT')}/"
+        f"{os.environ.get('RDS_DB_NAME')}"
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'TodosAppSecretKeyDev')
     WTF_CSRF_ENABLED = os.environ.get('WTF_CSRF_ENABLED', 'True') == 'True'
-    DEBUG = os.environ.get('FLASK_DEBUG', '0') == '1'
 
-class TestingConfig:
+class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:@localhost/todos"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = "TodosAppSecretKey"    

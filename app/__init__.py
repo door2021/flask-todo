@@ -6,16 +6,16 @@ from .extensions import db, migrate, login_manager, mail, csrf
 def create_app(config_class=None):
 
     if config_class is None:
-        env = os.environ.get('FLASK_ENV', 'development')
-        if env == 'production':
-            from config import ProductionConfig
-            config_class = ProductionConfig
+        env = os.environ.get('FLASK_ENV', 'production')
+        if env == 'development':
+            from config import DevelopmentConfig
+            config_class = DevelopmentConfig
         elif env == 'testing':
             from config import TestingConfig
             config_class = TestingConfig
         else:
-            from config import DevelopmentConfig
-            config_class = DevelopmentConfig
+            from config import ProductionConfig
+            config_class = ProductionConfig
     
     app = Flask(__name__)
     app.config.from_object(config_class)
