@@ -64,11 +64,11 @@ A production-ready task management web application built with Flask, featuring u
    SECRET_KEY=your-secret-key-here
    
    # Database (for local MySQL)
-   RDS_USERNAME=root
+   RDS_USERNAME=username
    RDS_PASSWORD=your-password
    RDS_HOST=localhost
    RDS_PORT=3306
-   RDS_DB_NAME=todos
+   RDS_DB_NAME=your-db-name
    
    # Email Configuration
    MAIL_SERVER=smtp.gmail.com
@@ -141,7 +141,7 @@ flask-todo-app/
 ```python
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://user:pass@localhost/todos"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://user:pass@localhost/your-db-name"
 ```
 
 ### Production (AWS)
@@ -167,11 +167,11 @@ class ProductionConfig(Config):
 aws secretsmanager create-secret \
   --name prod/flask-todo/db \
   --secret-string '{
-    "username":"admin",
+    "username":"username",
     "password":"your-password",
     "host":"your-rds-endpoint.rds.amazonaws.com",
     "port":3306,
-    "dbname":"todos"
+    "dbname":"your-db-name"
   }'
 ```
 
